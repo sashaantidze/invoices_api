@@ -9,7 +9,7 @@ use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
-class CreateInvoice extends Controller
+class CreateInvoiceController extends Controller
 {
 
     public function __invoke(StoreInvoiceReqeust $request)

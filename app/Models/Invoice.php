@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Item;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Invoice extends Model
 {
@@ -38,5 +39,15 @@ class Invoice extends Model
     public function items()
     {
         return $this->hasMany(Item::class);
+    }
+
+
+    public function getInvoiceDateAttribute($value){
+        return Carbon::create($value)->toFormattedDateString();
+    }
+
+
+    public function getInvoicePaymentDueAttribute($value){
+        return Carbon::create($value)->toFormattedDateString();
     }
 }
