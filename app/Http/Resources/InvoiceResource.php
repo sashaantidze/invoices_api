@@ -16,27 +16,31 @@ class InvoiceResource extends JsonResource
     public function toArray($request)
     {
         return [
+
             'id' => $this->id,
             'uid' => $this->uid,
             'invoice_date' => $this->invoice_date,
             'invoice_payment_due' => $this->invoice_payment_due,
             'invoice_paid' => $this->invoice_paid,
+            'invoice_draft' => $this->drafted,
             'description' => $this->description,
             'itemsTotal' => $this->items()->sum('total'),
             'items' => new ItemCollection($this->items),
+
             'biller_data' => [
-                'street_address' => $this->street_address,
+                'street_address' => $this->street_addreess,
                 'city' => $this->city,
                 'zip_code' => $this->zip_code,
                 'country' => $this->country,
             ],
+            
             'client_data' => [
-                'client_name' => $this->client_name,
-                'client_email' => $this->client_email,
-                'client_street_addr' => $this->client_street_addr,
-                'client_city' => $this->client_city,
-                'client_zip_code' => $this->client_zip_code,
-                'client_zip_country' => $this->client_zip_country,
+                'name' => $this->client_name,
+                'email' => $this->client_email,
+                'street_address' => $this->client_street_addr,
+                'city' => $this->client_city,
+                'zip_code' => $this->client_zip_code,
+                'country' => $this->client_zip_country,
             ],
 
             
