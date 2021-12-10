@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreInvoiceReqeust;
+use App\Http\Resources\InvoiceResource;
 use App\Models\Invoice;
 use App\Models\Item;
 use Illuminate\Http\Request;
@@ -40,7 +41,7 @@ class CreateInvoiceController extends Controller
         foreach($invoiceItems as $item){
             $itemModels[] = new Item([
                 'uid' => $item['id'],
-                'name' => $item['itemName'],
+                'name' => $item['name'],
                 'qty' => $item['qty'],
                 'price' => $item['price'],
                 'total' => $item['total'],
@@ -52,7 +53,7 @@ class CreateInvoiceController extends Controller
         $newInvoice->items()->saveMany($itemModels);
 
 
-        return response()->json($newInvoice, 201);
+        return response()->json(new InvoiceResource($newInvoice), 201);
 
     }
 }

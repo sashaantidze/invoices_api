@@ -11,7 +11,7 @@ class InvoiceController extends Controller
 {
     public function __invoke()
     {
-        $data = Invoice::orderBy('created_at', 'desc')->take(10)->get();
+        $data = Invoice::orderBy('created_at', 'desc')->take(20)->get();
 
         return new InvoiceCollection($data);
     }
