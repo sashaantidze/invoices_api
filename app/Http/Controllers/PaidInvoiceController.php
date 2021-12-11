@@ -14,15 +14,22 @@ class PaidInvoiceController extends Controller
             return response()->json(['message' => 'Requested resource not found'], Response::HTTP_NOT_FOUND);
         }
 
-        if($invoice->invoice_paid){
-            $invoice->invoice_paid = null;
+        if($invoice->drafted){
+            $invoice->drafted = null;
         }
         else{
-            $invoice->invoice_paid = now();
+            if($invoice->invoice_paid){
+                $invoice->invoice_paid = null;
+            }
+            else{
+                $invoice->invoice_paid = now();
+                $invoice->drafted = null;
+            }
         }
+
         
         $invoice->save();
 
-        return response()->json(['invoice_paid' => $invoice->invoice_paid]);
+        return response()->json(['invoice_paid' => $invoice->invoice_paid, 'invoice_draft' => $invoice->drafted]);
     }
 }

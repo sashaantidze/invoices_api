@@ -27,6 +27,7 @@ class Invoice extends Model
         'invoice_payment_due',
         'invoice_paid',
         'description',
+        'drafted',
     ];
 
 

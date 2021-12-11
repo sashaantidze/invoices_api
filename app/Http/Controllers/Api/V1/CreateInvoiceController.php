@@ -29,10 +29,11 @@ class CreateInvoiceController extends Controller
             'client_city' => $request->clientCity,
             'client_zip_code' => $request->clientZipCode,
             'client_zip_country' => $request->clientCountry,
+            'description' => $request->productDescription,
             'invoice_date' => Carbon::createFromTimestampMs($request->invoiceDateUnix),
             'invoice_payment_due' => Carbon::createFromTimestampMs($request->paymentDueDateUnix),
             'invoice_paid' => null,
-            'description' => $request->productDescription
+            'drafted' => $request->invoiceDraft ? 1 : null
         ];
 
         $invoiceItems = $request->invoiceItemList;
