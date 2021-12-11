@@ -17,7 +17,7 @@ class UpdateInvoiceController extends Controller
     {
 
         if(!$invoice = Invoice::where('uid', $request->uid)->first()){
-            return response()->json(['message' => 'Requsted resource not found'], Response::HTTP_NOT_FOUND);
+            return response()->json(['message' => 'Requested resource not found'], Response::HTTP_NOT_FOUND);
         }
 
         $invoice->uid = $request->invoiceId;
@@ -45,7 +45,7 @@ class UpdateInvoiceController extends Controller
 
         foreach($invoiceItems as $item){
             $itemModels[] = new Item([
-                'uid' => $item['id'],
+                'uid' => $item['uid'],
                 'name' => $item['name'],
                 'qty' => $item['qty'],
                 'price' => $item['price'],
@@ -55,8 +55,6 @@ class UpdateInvoiceController extends Controller
 
         $invoice->items()->saveMany($itemModels);
 
-        dumph($request->all());
-
-        //return new InvoiceResource()
+        return response()->json(new InvoiceResource($invoice));
     }
 }

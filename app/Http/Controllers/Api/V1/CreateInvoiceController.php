@@ -9,6 +9,7 @@ use App\Models\Invoice;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Symfony\Component\HttpFoundation\Response;
 
 class CreateInvoiceController extends Controller
 {
@@ -40,7 +41,7 @@ class CreateInvoiceController extends Controller
 
         foreach($invoiceItems as $item){
             $itemModels[] = new Item([
-                'uid' => $item['id'],
+                'uid' => $item['uid'],
                 'name' => $item['name'],
                 'qty' => $item['qty'],
                 'price' => $item['price'],
@@ -53,7 +54,7 @@ class CreateInvoiceController extends Controller
         $newInvoice->items()->saveMany($itemModels);
 
 
-        return response()->json(new InvoiceResource($newInvoice), 201);
+        return response()->json(new InvoiceResource($newInvoice), Response::HTTP_CREATED);
 
     }
 }

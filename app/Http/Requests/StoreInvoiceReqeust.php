@@ -42,7 +42,7 @@ class StoreInvoiceReqeust extends FormRequest
             'paymentDueDate' => 'required',
             'productDescription' => 'required',
             'invoiceItemList' => 'required',
-            'invoiceItemList.*.id' => 'required',
+            'invoiceItemList.*.uid' => 'required',
             'invoiceItemList.*.name' => 'required',
             'invoiceItemList.*.qty' => 'required',
             'invoiceItemList.*.price' => 'required',
